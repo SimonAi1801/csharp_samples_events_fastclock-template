@@ -33,7 +33,7 @@
         <TextBox x:Name="TextBoxFactor" Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" Text="60" Margin="5" HorizontalContentAlignment="Right" Height="27" VerticalAlignment="Bottom" Width="150" FontFamily="Arial" FontSize="16" />
         <Slider x:Name="SliderFactor" Grid.Row="0" Grid.Column="2" Margin="5" Maximum="3600" Value="{Binding Text, Converter={StaticResource StringToIntConverter}, ElementName=TextBoxFactor}" />
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-            <DatePicker x:Name="DatePickerDate" FontFamily="Arial" FontSize="16" Width="136" Margin="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <DatePicker x:Name="DatePickerDate" FontFamily="Arial" FontSize="16" Width="136" Margin="5,5,5,5.4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <TextBox x:Name="TextBoxTime" TextWrapping="Wrap" Text="00:00" Width="99" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" FontFamily="Arial" FontSize="16" Padding="5"/>
         </StackPanel>
         <TextBlock x:Name="TextBlockDate" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Text="01.01.2000"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="16"/>
