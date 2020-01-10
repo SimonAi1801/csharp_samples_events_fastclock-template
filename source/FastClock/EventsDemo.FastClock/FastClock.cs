@@ -37,14 +37,9 @@ namespace EventsDemo.FastClock
 
         private FastClock()
         {
-            CurrentDateTime = DateTime.Now;
+            //CurrentDateTime = DateTime.Now;
             _timer = new DispatcherTimer();
             _timer.Tick += OnTimerTick;
-            if (Factor == 0)
-            {
-                Factor = 1;
-            }
-            _timer.Interval = TimeSpan.FromMilliseconds(1000 / Factor);
         }
 
         public static FastClock GetInstance()
@@ -58,6 +53,11 @@ namespace EventsDemo.FastClock
 
         private void OnTimerTick(object sender, EventArgs e)
         {
+            if (Factor == 0)
+            {
+                Factor = 1;
+            }
+            _timer.Interval = TimeSpan.FromMilliseconds(1000 / Factor);
             CurrentDateTime = CurrentDateTime.AddMinutes(1);
             OnOneMinuteIsOver(CurrentDateTime);
         }

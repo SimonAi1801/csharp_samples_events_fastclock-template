@@ -22,13 +22,18 @@ namespace EventsDemo.FastClockWpf
 
         private void ButtonSetTime_Click(object sender, RoutedEventArgs e)
         {
-            DateTime date = DateTime.Parse($"{DatePickerDate.SelectedDate} {TextBoxTime.Text}");
-            FastClock.FastClock.GetInstance().CurrentDateTime = date;
+            string[] time = TextBoxTime.Text.Split(':');
+            DateTime dateTime = Convert.ToDateTime(DatePickerDate.SelectedDate).AddHours(Convert.ToInt32(time[0])).AddMinutes(Convert.ToInt32(time[1]));
+            FastClock.FastClock.GetInstance().CurrentDateTime = dateTime;
+            SetFastClockStartDateAndTime();
         }
 
         private void SetFastClockStartDateAndTime()
         {
-
+            string[] dates = Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Date).Split(' ');
+            string time = $"{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Hour)}:{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Minute)}";
+            TextBlockDate.Text = dates[0];
+            TextBlockTime.Text = time;
         }
 
         private void FastClockOneMinuteIsOver(object sender, DateTime fastClockTime)
