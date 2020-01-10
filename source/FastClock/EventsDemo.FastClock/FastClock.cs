@@ -37,7 +37,6 @@ namespace EventsDemo.FastClock
 
         private FastClock()
         {
-            //CurrentDateTime = DateTime.Now;
             _timer = new DispatcherTimer();
             _timer.Tick += OnTimerTick;
         }

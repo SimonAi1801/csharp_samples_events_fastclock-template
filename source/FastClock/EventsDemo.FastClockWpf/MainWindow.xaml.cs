@@ -23,7 +23,7 @@ namespace EventsDemo.FastClockWpf
         private void ButtonSetTime_Click(object sender, RoutedEventArgs e)
         {
             string[] time = TextBoxTime.Text.Split(':');
-            DateTime dateTime = Convert.ToDateTime(DatePickerDate.SelectedDate).AddHours(Convert.ToInt32(time[0])).AddMinutes(Convert.ToInt32(time[1]));
+            DateTime dateTime = Convert.ToDateTime(DatePickerDate.SelectedDate).AddHours(Convert.ToDouble(time[0])).AddMinutes(Convert.ToDouble(time[1]));
             FastClock.FastClock.GetInstance().CurrentDateTime = dateTime;
             SetFastClockStartDateAndTime();
         }
@@ -31,7 +31,15 @@ namespace EventsDemo.FastClockWpf
         private void SetFastClockStartDateAndTime()
         {
             string[] dates = Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Date).Split(' ');
-            string time = $"{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Hour)}:{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Minute)}";
+            string time;
+            if (FastClock.FastClock.GetInstance().CurrentDateTime.Hour >= 0 && FastClock.FastClock.GetInstance().CurrentDateTime.Hour < 10)
+            {
+                time = $"0{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Hour)}:{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Minute)}";
+            }
+            else
+            {
+                time = $"{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Hour)}:{Convert.ToString(FastClock.FastClock.GetInstance().CurrentDateTime.Minute)}";
+            }
             TextBlockDate.Text = dates[0];
             TextBlockTime.Text = time;
         }
@@ -39,6 +47,7 @@ namespace EventsDemo.FastClockWpf
         private void FastClockOneMinuteIsOver(object sender, DateTime fastClockTime)
         {
             TextBlockTime.Text = fastClockTime.ToShortTimeString();
+            TextBlockDate.Text = fastClockTime.ToShortDateString();
         }
 
         private void CheckBoxClockRuns_Click(object sender, RoutedEventArgs e)
